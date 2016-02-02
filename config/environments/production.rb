@@ -72,6 +72,17 @@ App1::Application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
+  config.action_mailer.default_url_options = { host: 'bhanublog.herokuapp.com', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'gmail.com',
+  user_name:            'testrailsid',
+  password:             'testrail',
+  authentication:       :login,
+  enable_starttls_auto: true  }
+
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
