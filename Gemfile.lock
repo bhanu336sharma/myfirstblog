@@ -62,7 +62,7 @@ GEM
     coffee-script-source (1.10.0)
     commonjs (0.2.7)
     daemons (1.2.3)
-    devise (3.5.5)
+    devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -206,7 +206,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    warden (1.2.4)
+    warden (1.2.6)
       rack (>= 1.0)
 
 PLATFORMS
