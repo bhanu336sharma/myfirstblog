@@ -1,0 +1,99 @@
+<div class="container"><table class="table table-hover table-bordered table-condensed " border="1" id="mytable">
+
+	 <tr>
+		  <th>student name</th>		
+		  <th>roll number</th>	
+          <th>email id</th>
+	 </tr>
+
+	 <tr>
+		  <td><%= @student.name %> </td>
+		  <td><%= @student.roll_no %> </td>	
+      <td><%= @student.email %></td>
+      <td><button id=<%=@student.id %> class = "myfunc"><%= @student.check ?  "pass" : "fail" %></button></td>
+      <td><%= image_tag @student.photo_url() if @student.photo? %></td>
+	 </tr>
+</table>
+
+
+<h2>Contact info</h2>
+
+<% @student.contacts.each do |contact| %>
+    <p>
+        <strong>phone number</strong>
+        <%= contact.phone_no %>
+    </p>
+    <p>
+        <strong>house number</strong>
+        <%= contact.house_no %>
+    </p>
+    <p>
+        <strong>street number</strong>
+        <%= contact.street_no %>
+    </p>
+    <p>
+        <strong>city</strong>
+        <%= contact.city %>
+    </p>
+<% end %>
+
+
+<h1>Add an address:</h1>
+<%= form_for([@student, @student.contacts.build]) do |f| %>
+    <p>
+        <%= f.label :phone_no %><br>
+        <%= f.text_field :phone_no %>
+    </p>
+    <p>
+        <%= f.label :house_no %><br>
+        <%= f.text_field :house_no %>
+    </p>
+    <p>
+        <%= f.label :street_no %><br>
+        <%= f.text_field :street_no %>
+    </p>
+    <p>
+        <%= f.label :city %><br>
+        <%= f.text_field:city %>
+    </p>
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %></div>
+
+<nav class="navbar navbar-default ">
+<div class="col-sm-offset-6"><%= link_to 'Edit', edit_student_path(@student) %>||
+<%= link_to 'Back', students_path %>
+</div>
+</nav>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $(".myfunc").click(function(){
+      	var src = $(this)
+      	var user_id = src.attr("id")
+      	// alert(user_id)
+   	    $.ajax({    	    	   
+	        url: "/students/"+user_id+"/status",
+	        data: "data="+src.html() ,
+	        success: function(){
+	        	console.log("success")
+	        	if(src.html()=="pass"){
+	        		src.html("fail")
+	        		$("#"+user_id).css("background-color","red")
+	        	}
+	        	else{
+	        		src.html("pass")
+	        		$('#'+user_id).css("background-color", "green")
+	        	}
+
+	        },
+	        error: function(){
+	        	
+	        	console.log("error")
+	        }
+	    })
+   	})
+  })
+</script>

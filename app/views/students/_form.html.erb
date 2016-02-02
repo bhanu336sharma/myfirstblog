@@ -1,0 +1,61 @@
+<div class="container form-horizontal col-sm-offset-4">
+ <%= form_for @student do |f| %>
+
+ <div class="form-group field">
+    <div class="col-sm-2 control-label"><%= f.label :name %><br /></div>
+    <div class="col-sm-4"><%= f.text_field :name %></div>
+  </div>
+  <div class="form-group field">
+    <div class="col-sm-2 control-label"><%= f.label :roll_no  %><br /></div>
+    <div class="col-sm-4"><%= f.text_field :roll_no  %></div>
+  </div>
+  <div class="form-group field">
+    <div class="col-sm-2 control-label"><%= f.label :email %><br /></div>
+    <div class="col-sm-4"><%= f.email_field :email%></div>
+  </div>
+  <div class="form-group field">
+    <div class="col-sm-2 control-label"><%= f.label :photo %><br /></div>
+    <div class="col-sm-4"><%= f.file_field :photo %></div>
+  </div>
+    
+  <!-- <div> -->
+    <!-- <div class="col-sm-2 control-label"><%= f.label :remote_photo_url, "photo URL" %></div><br />
+    <div class="col-sm-4"><%= f.text_field :remote_photo_url %></div>
+  </div><br/> -->
+
+    <%= f.button "Submit", :class => 'btn btn-primary col-sm-2 col-sm-offset-2', 'id' => 'submit'%>
+
+ <!--  <button id="submit" type="button" class="btn btn-primary col-sm-2 col-sm-offset-2" data-toggle="modal" data-target=".bs-example-modal-sm">Submit</button>  -->
+
+  <div id ="for_name" aria-labelledby="mySmallModalLabel" role="dialog" tabindex="-1" class="modal fade in" style="padding-right: 13px;"> 
+    <div class="modal-dialog modal-sm"> 
+      <div class="modal-content"> 
+        <div class="modal-header"> 
+          <button aria-label="Close" data-dismiss="modal" class="close" type="button">
+            <span aria-hidden="true">×</span>
+          </button> 
+          <h4 id="mySmallModalLabel" class="modal-title">Alert!</h4> 
+        </div> 
+          <div class="modal-body"></div> 
+        </div> 
+      </div> 
+    </div>
+          
+<% end %>
+</div>
+
+<script type="text/javascript">
+    $("#submit").click(function(){
+      if($("#student_name").val() == ""){
+        $(".modal-body").html("Name cant be left blank")
+        $('#for_name').modal('show');
+      }
+      else if($("#student_roll_no").val().length != "5"){
+        $(".modal-body").html("Roll must be of 5 length")
+        $('#for_name').modal('show');
+      }
+      else{
+        $("#new_student").submit()
+      }         
+    })
+</script>

@@ -1,0 +1,19 @@
+<div class="container">
+    <h1 id = "div1"></h1>
+    <h1  align="center">STUDENT RECORDS</h1>
+
+    <table class="table table-hover table-bordered table-condensed ">
+    <tr>
+        <th>NAME</th>
+    </tr>
+    <% @student.each do |obj| %>
+        <%if obj.role == 'student'%>
+            <tr>
+                <td>
+                    <%=obj.email%>
+                   
+                </td>
+            </tr>
+        <%end%>
+    <%end%>
+    </table>

@@ -1,0 +1,19 @@
+<% @student.contacts.each do |contact| %>
+    <p>
+        <strong>phone number</strong>
+        <%= contact.phone_no %>
+    </p>
+    <p>
+        <strong>house number</strong>
+        <%= contact.house_no %>
+    </p>
+    <p>
+        <strong>street number</strong>
+        <%= contact.street_no %>
+    </p>
+    <p>
+        <strong>city</strong>
+        <%= contact.city %>
+    </p>
+<% end %>
+

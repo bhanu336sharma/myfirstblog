@@ -1,0 +1,42 @@
+<div class="container">
+    <h1 id = "div1"></h1>
+    <h1  align="center">TEACHER RECORDS</h1>
+    <table class="table table-hover  table-bordered table-condensed ">
+        <tr>
+            <th>NAME</th>
+        </tr>
+        <% @teacher.each do |obj| %>
+        <%if obj.role == 'teacher'%>
+        <tr>
+            <td>
+                <%=obj.email%>
+            </td>
+        </tr>
+        <%end%>
+        <%end%>
+    </table>
+</div>
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+ -->
+<!-- <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      dsdsdsdsd s swd sds dsdsdsd
+    </div>
+  </div>
+</div> -->
+<!-- 
+<div aria-labelledby="mySmallModalLabel" role="dialog" tabindex="-1" class="modal fade bs-example-modal-sm in" style="padding-right: 13px;"> 
+    <div class="modal-dialog modal-sm"> 
+        <div class="modal-content"> 
+            <div class="modal-header"> 
+                <button aria-label="Close" data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">×</span>
+                </button> 
+                <h4 id="mySmallModalLabel" class="modal-title">Small modal</h4> 
+            </div> 
+            <div class="modal-body"> ... </div> 
+        </div> 
+    </div> 
+</div> -->

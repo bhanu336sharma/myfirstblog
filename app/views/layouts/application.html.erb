@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App1</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-default">
+      <div class="collapse navbar-collapse" id="user"> 
+        <ul class="nav navbar-nav " style="width:100%">
+          <li><%= link_to "My application","/students"%></p></li>
+          <%if user_signed_in?%>
+            <% if current_user.role == "principle"%>
+              <li><%= link_to "Teachers" , "/teacher_list" %></li>
+              <li><%= link_to "Students" , "/student_list" %></li>
+            <% elsif current_user.role == "teacher"%>
+              <li ><%= link_to "Students" , "/student_list" %></li>
+            <%end%>
+            <li class="pull-right" ><%=link_to "Sign Out", "/users/sign_out", method: :delete %></li>
+            <li class="pull-right"><p class="navbar-text"><%=current_user.email%>!!</p></li>
+          <%else%>
+            <li class="pull-right" ><%=link_to "Admin ","/admin/login" %></li>
+            <li class="pull-right" ><%=link_to "Sign In","/users/sign_in" %></li>
+            <li class="pull-right" ><%=link_to "Sign Up","/users/sign_up" %></li>         
+          <%end%>
+        </ul>
+    </div>
+    </nav>
+    <%= yield %>
+  </div>
+
+
+
+</body>
+</html>

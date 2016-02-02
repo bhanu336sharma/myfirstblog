@@ -1,0 +1,77 @@
+//     $(".checks").unbind('click');
+//     $(".checks").click(function(){
+//          alert("js file executed")
+//         user = $(this)
+//         user_id = user.attr("id")
+//         if(user.is(":checked")){
+//             t = true 
+//         }
+//         else
+//             t= false
+
+//         $.ajax({    
+//             url: "/students/"+user_id+"/update_check" ,
+//             data: "data="+t,           
+//             success: function(res){ 
+//             console.log(res)            
+//             if(user.is(":checked")){
+
+//                 $('#div1').empty()
+//                 $('#div1').prepend(res.get_data.name) 
+//                 $('#div1').append(res.get_data.email) 
+//             }                         
+//             },
+//             error:function(){
+//                 alert('error')
+//             } 
+//         })
+//     })
+
+// $(".myfunc").unbind();
+//     $(".myfunc")
+//     .mouseenter(function(){
+//         user = $(this)
+//         user_id=user.attr("id")
+//         if(user.html().trim() == "fail"){
+//             user.html("pass").removeClass("red").addClass("green")  
+//         }
+//         else{
+//             user.html("fail").removeClass("green").addClass("red")  
+//         }    
+//     })
+
+//     .click(function(){
+//         user = $(this)
+//         user_id=user.attr("id")
+//         $.ajax({     
+//             url: "/students/"+user.attr("id")+"/restatus",
+//             data: "data="+user.html(),
+
+//             success: function(){
+//                 if(user.attr("name") == "fail"){
+//                     user.attr("name","pass")
+//                 }
+//                 else{
+//                     user.attr("name","fail")
+//                 }
+//             },
+//             error:function(){
+//                 alert('error')
+//             } 
+//         })
+//     })
+    
+//     .mouseleave(function(){
+//         user = $(this)
+//         user_id=user.attr("id")
+//         if(user.html().trim() != user.attr("name"))
+//         {
+//             if(user.html().trim() == "fail"){
+//                 user.html("pass").removeClass("red").addClass("green")    
+//             }
+//             else{
+//                 user.html("fail").removeClass("green").addClass("red")     
+//             }
+//         }
+//     })
+

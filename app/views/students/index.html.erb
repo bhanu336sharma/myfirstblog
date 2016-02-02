@@ -1,0 +1,170 @@
+<style>
+button.green {
+    background-color:green;  
+    }
+button.red {
+    background-color: red;
+}
+
+</style>
+<%if user_signed_in?%>
+<div class="container">
+    <h1 id = "div1"></h1>
+    <h1  align="center">STUDENT RECORDS</h1>
+
+    <table class="table table-hover table-bordered table-condensed ">
+    <tr>
+        <th>NAME</th>
+        <th>STATUS</th>
+    </tr>
+
+    <% @student.each do |obj| %>
+        <tr>
+            <td><%=obj.name%></td>
+            <td><%= image_tag obj.photo_url(:thumb) if obj.photo? %></td>
+            <td><button id=<%=obj.id %>data-toggle="tooltip" data-placement="right" title="<%= obj.check ? "pass": "fail"%>" data-button='{"<%= obj.check ? "pass" : "fail" %>"}'class="btn myfunc <%= obj.check ? "green" : "red" %>" name=<%= obj.check ? "pass" : "fail"%> data-remote="true" ><%= obj.check ? "pass" : "fail"%></button></td>
+            <td><%= link_to 'View Contact options', "/students/#{obj.id}/show" %></td>
+            <%# if can? :update, current_user %>
+            <td><%= link_to 'EDIT', "/students/#{obj.id}/edit" %></td>
+            <td class="danger"><%= link_to 'DELETE', "/students/#{obj.id}",  method: :delete , :confirm => "Are you sure you want to delete this item?"  %></td>
+        <%#end%>
+            <td><%=link_to 'SEND MAIL',"/students/#{obj.id}/send_mail"%></td>
+            <div id="mycontent"></div>
+            <td><input type="checkbox"id=<%=obj.id%>class="checks"></td><br/>
+            <td><%= button_to 'Click me',
+                {:controller => "students", :action => "status", :id => obj.id },
+                :class=>'btn btn-danger approve add_loader',
+                :method=>:get, :remote=>true %>
+            </td>
+        </tr>
+    <%end%>
+    </table>
+
+    <br/><br/><br/>
+    <h2 align="center">
+        <%# if can? :update, current_user %>
+            <%= link_to 'New record', new_student_path %>
+        <%#end%>
+    </h2>
+   </div>
+<%else%>
+    <h1  align="center">STUDENT RECORDS</h1>
+    <div id="carousel1" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel1" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel1" data-slide-to="1"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div style="height:500px;">
+                <img src="book.jpg" alt="sorry">
+            </div>
+        </div>
+        <div class="item">
+            <div style="height:500px;">
+                <img src="books.jpg" alt="sorry" >
+            </div>
+        </div>    
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel1" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">&lt;Previous</span>
+      </a>
+      <a class="right carousel-control"href="#carousel1" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next&gt;</span>
+      </a>
+    </div>
+<%end%>
+    
+<script type="text/javascript">
+    $(".checks").unbind('click');
+    $(".checks").click(function(){
+         alert("js file executed")
+        user = $(this)
+        user_id = user.attr("id")
+        if(user.is(":checked")){
+            t = true 
+        }
+        else
+            t= false
+
+        $.ajax({    
+            url: "/students/"+user_id+"/update_check" ,
+            data: "data="+t,           
+            success: function(res){ 
+            console.log(res)            
+            if(user.is(":checked")){
+
+                $('#div1').empty()
+                $('#div1').prepend(res.get_data.name) 
+                $('#div1').append(res.get_data.email) 
+            }                         
+            },
+            error:function(){
+                alert('error')
+            } 
+        })
+    })
+
+$(".myfunc").unbind();
+    $(".myfunc")
+    .mouseenter(function(){
+        user = $(this)
+        user_id=user.attr("id")
+        if(user.html().trim() == "fail"){
+            user.html("pass").removeClass("red").addClass("green")  
+        }
+        else{
+            user.html("fail").removeClass("green").addClass("red")  
+        }    
+    })
+
+    .click(function(){
+        user = $(this)
+        user_id=user.attr("id")
+        $.ajax({     
+            url: "/students/"+user.attr("id")+"/restatus",
+            data: "data="+user.html(),
+
+            success: function(){
+                if(user.attr("name") == "fail"){
+                    user.attr("name","pass")
+                }
+                else{
+                    user.attr("name","fail")
+                }
+            },
+            error:function(){
+                alert('error')
+            } 
+        })
+    })
+    
+    .mouseleave(function(){
+        user = $(this)
+        user_id=user.attr("id")
+        if(user.html().trim() != user.attr("name"))
+        {
+            if(user.html().trim() == "fail"){
+                user.html("pass").removeClass("red").addClass("green")    
+            }
+            else{
+                user.html("fail").removeClass("green").addClass("red")     
+            }
+        }
+    })
+
+    // $(".mypop").click(function(){
+    //   $(this).popover()
+    // })
+    $('.carousel').carousel({
+      interval: 1700
+    })
+
+</script>
