@@ -13,6 +13,10 @@ gem 'activeadmin', '1.0.0.pre1'
 #Use carrierwave for uploading images
 gem 'carrierwave'
 
+# Use kaminari for pagination
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'

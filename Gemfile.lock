@@ -42,6 +42,9 @@ GEM
       activesupport (>= 3.0.0)
     arel (4.0.2)
     bcrypt (3.1.10)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bourbon (3.2.4)
       sass (~> 3.2)
       thor
@@ -190,12 +193,14 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin (= 1.0.0.pre1)
+  bootstrap-kaminari-views
   cancan
   carrierwave
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 1.2)
   jquery-rails
+  kaminari
   mini_magick
   pry
   rails (= 4.0.13)

@@ -2,14 +2,16 @@ class StudentsController < ApplicationController
 # before_action :authenticate_user!
  # load_and_authorize_resource
 	def index
-		@student = Student.all
+		# @student = Student.all
+    @student = Student.page(params[:page]).per(3)
 		# respond_to do |format|
   #   		format.html
   #   		format.json 
   #       end
 	end
   def student_list
-    @student = User.all
+    # @student = User.all
+     @student = User.page(params[:page]).per(3)
   end
   
   def teacher_list

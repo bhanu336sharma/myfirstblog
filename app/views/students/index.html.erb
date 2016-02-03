@@ -12,7 +12,9 @@ button.red {
     <h1 id = "div1"></h1>
     <h1  align="center">STUDENT RECORDS</h1>
 
+    <%= paginate(@student)%>
     <table class="table table-hover table-bordered table-condensed ">
+    
     <tr>
         <th>NAME</th>
         <th>STATUS</th>
@@ -39,6 +41,7 @@ button.red {
         </tr>
     <%end%>
     </table>
+    <%= paginate(@student) %>
 
     <br/><br/><br/>
     <h2 align="center">
