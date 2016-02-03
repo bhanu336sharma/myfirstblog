@@ -49,68 +49,54 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-     // $("#new_student").submit(function( event ) {
-     //    event.preventDefault()
-     //    event.stopPropagation()
-
-     //    $("#new_student").validate({
-     //      rules: {
-     //        student[name]: "required"
-     //      },
-     //      messages: {
-     //        student[name]: "Please enter your name"
-     //      } 
-     //    });
-     //  })
-  $("#new_student").validate({
-      rules: {
-        "student[name]": {
-          required: true
+    $("#new_student").validate({
+        rules: {
+          "student[name]": {
+            required: true
+          },
+          "student[roll_no]": {
+            minlength: 5,
+            maxlength: 5,
+            required: true
+          },
+          "student[email]": {
+            required: true,
+            email: true
+          } ,
+          "student[photo]": {
+            required: true
+          }
         },
-        "student[roll_no]": {
-          minlength: 5,
-          maxlength: 5,
-          required: true
-        },
-        "student[email]": {
-          required: true,
-          email: true
-        } ,
-        "student[photo]": {
-          required: true
+        messages: {
+          "student[name]": {
+            required: "Please enter your name"
+          },
+          "student[roll_no]": {
+            required: "Please your roll number of length 5",
+            minlength: "Roll numbermust be of length 5"
+          },
+          "student[email]": {
+            required: "Please enter your email",
+            email: "Please enter a valid email"
+          },
+          "student[photo]": {
+            require: "Photo required"
+          }
         }
-      },
-      messages: {
-        "student[name]": {
-          required: "Please enter your name"
-        },
-        "student[roll_no]": {
-          required: "Please your roll number of length 5",
-          minlength: "Roll numbermust be of length 5"
-        },
-        "student[email]": {
-          required: "Please enter your email",
-          email: "Please enter a valid email"
-        },
-        "student[photo]": {
-          require: "Photo required"
-        }
+      });
+      
+    $("#submit").click(function(){
+      if($("#student_name").val() == ""){
+        $(".modal-body").html("Name cant be left blank")
+        $('#for_name').modal('show');
       }
+      else if($("#student_roll_no").val().length != "5"){
+        $(".modal-body").html("Roll must be of 5 length")
+        $('#for_name').modal('show');
+      }
+      else{
+        $("#new_student").submit()
+      }         
     });
-    
-    // $("#submit").click(function(){
-    //   if($("#student_name").val() == ""){
-    //     $(".modal-body").html("Name cant be left blank")
-    //     $('#for_name').modal('show');
-    //   }
-    //   else if($("#student_roll_no").val().length != "5"){
-    //     $(".modal-body").html("Roll must be of 5 length")
-    //     $('#for_name').modal('show');
-    //   }
-    //   else{
-    //     $("#new_student").submit()
-    //   }         
-    // });
-
   });
 </script>

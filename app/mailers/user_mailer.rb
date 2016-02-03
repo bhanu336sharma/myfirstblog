@@ -4,5 +4,6 @@ class UserMailer < ActionMailer::Base
   	@student = student
   	@url = "/students/new"
   	mail(to: @student.email, subject: "welcome new user")
-  end
+  end 
+  handle_asynchronously :welcome
 end

@@ -1,22 +1,28 @@
 source 'https://rubygems.org'
-gem 'devise'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.13'
 
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem 'sqlite3'
 # gem 'pg'
 
 gem 'activeadmin', '1.0.0.pre1'
-
 #Use carrierwave for uploading images
 gem 'carrierwave'
-
+gem 'pry'
+gem 'cancan'
+gem 'devise'
 # Use kaminari for pagination
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
-
+gem "twitter-bootstrap-rails"
+gem 'mini_magick'
+gem 'rails_db_info' #//localhost:3000/rails/info/database
+gem 'delayed_job_active_record'
+gem 'delayed_job'
+gem 'daemons'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
@@ -30,8 +36,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-gem 'pry'
-gem 'cancan'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -60,5 +65,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem "twitter-bootstrap-rails"
-gem 'mini_magick'

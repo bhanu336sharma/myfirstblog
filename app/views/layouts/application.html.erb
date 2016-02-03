@@ -5,13 +5,15 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <!-- including jquery and validate plugin in our app -->
-  
   <%= csrf_meta_tags %>
-
 </head>
 <body>
   <div class="container-fluid">
+    <% if notice %>
+      <div class = "alert alert-success"><%=notice%></div>
+    <% elsif alert %>
+      <div class = "alert alert-danger"><%=alert%></div>
+    <%end%>
     <nav class="navbar navbar-default">
       <div class="collapse navbar-collapse" id="user"> 
         <ul class="nav navbar-nav " style="width:100%">
@@ -31,12 +33,16 @@
             <li class="pull-right" ><%=link_to "Sign Up","/users/sign_up" %></li>         
           <%end%>
         </ul>
-    </div>
+     </div>
     </nav>
     <%= yield %>
   </div>
-
-
-
 </body>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    setTimeout(function(){
+      $(".alert").slideUp()
+    }, 2000);
+  })
+  </script>
 </html>
