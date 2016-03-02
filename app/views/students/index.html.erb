@@ -7,85 +7,121 @@ button.red {
 }
 
 </style>
-<%if user_signed_in?%>
-<div class="container">
-    <h1 id = "div1"></h1>
-    <h1  align="center">STUDENT RECORDS</h1>
+<body>
+    <%if user_signed_in?%>
+    <div class="container">
+        <h1 id = "div1"></h1>
+        <h1  align="center">STUDENT RECORDS</h1><br/>
 
-    <%= paginate(@student)%>
-    <table class="table table-hover table-bordered table-condensed ">
-    
-    <tr>
-        <th>NAME</th>
-        <th>STATUS</th>
-    </tr>
-
-    <% @student.each do |obj| %>
+        <%= paginate(@student)%>
+        <table class="table table-hover table-bordered table-condensed ">
+        
         <tr>
-            <td><%=obj.name%></td>
-            <td><%= image_tag obj.photo_url(:thumb) if obj.photo? %></td>
-            <td><button id=<%=obj.id %>data-toggle="tooltip" data-placement="right" title="<%= obj.check ? "pass": "fail"%>" data-button='{"<%= obj.check ? "pass" : "fail" %>"}'class="btn myfunc <%= obj.check ? "green" : "red" %>" name=<%= obj.check ? "pass" : "fail"%> data-remote="true" ><%= obj.check ? "pass" : "fail"%></button></td>
-            <td><%= link_to 'View Contact options', "/students/#{obj.id}/show" %></td>
-            <%# if can? :update, current_user %>
-            <td><%= link_to 'EDIT', "/students/#{obj.id}/edit" %></td>
-            <td class="danger"><%= link_to 'DELETE', "/students/#{obj.id}",  method: :delete , :confirm => "Are you sure you want to delete this item?"  %></td>
-        <%#end%>
-            <td><%=link_to 'SEND MAIL',"/students/#{obj.id}/send_mail"%></td>
-            <div id="mycontent"></div>
-            <td><input type="checkbox"id=<%=obj.id%>class="checks"></td><br/>
-            <td><%= button_to 'Click me',
-                {:controller => "students", :action => "status", :id => obj.id },
-                :class=>'btn btn-danger approve add_loader',
-                :method=>:get, :remote=>true %>
-            </td>
+            <th>NAME</th>
+            <th>STATUS</th>
         </tr>
-    <%end%>
-    </table>
-    <%= paginate(@student) %>
 
-    <br/><br/><br/>
-    <h2 align="center">
-        <%# if can? :update, current_user %>
-            <%= link_to 'New record', new_student_path %>
-        <%#end%>
-    </h2>
-   </div>
-<%else%>
-    <h1  align="center">STUDENT RECORDS</h1>
-    <div id="carousel1" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel1" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel1" data-slide-to="1"></li>
-      </ol>
+        <% @student.each do |obj| %>
+            <tr>
+                <td><%=obj.name%></td>
+                <td><%= image_tag obj.photo_url(:thumb) if obj.photo? %></td>
+                <td><button id=<%=obj.id %>data-toggle="tooltip" data-placement="right" title="<%= obj.check ? "pass": "fail"%>" data-button='{"<%= obj.check ? "pass" : "fail" %>"}'class="btn myfunc <%= obj.check ? "green" : "red" %>" name=<%= obj.check ? "pass" : "fail"%> data-remote="true" ><%= obj.check ? "pass" : "fail"%></button></td>
+                <td><%= link_to 'View Contact options', "/students/#{obj.id}/show" %></td>
+                <%# if can? :update, current_user %>
+                <td><%= link_to 'EDIT', "/students/#{obj.id}/edit" %></td>
+                <td class="danger"><%= link_to 'DELETE', "/students/#{obj.id}",  method: :delete , :confirm => "Are you sure you want to delete this item?"  %></td>
+            <%#end%>
+                <td><%=link_to 'SEND MAIL',"/students/#{obj.id}/send_mail"%></td>
+                <div id="mycontent"></div>
+                <td><input type="checkbox"id=<%=obj.id%>class="checks"></td><br/>
+                <td><%= button_to 'Click me',
+                    {:controller => "students", :action => "status", :id => obj.id },
+                    :class=>'btn btn-danger approve add_loader',
+                    :method=>:get, :remote=>true %>
+                </td>
+            </tr>
+        <%end%>
+        </table>
+        <%= paginate(@student) %>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div style="height:500px;">
-                <img src="/assets/book.jpg" alt="sorry">
+        <br/><br/><br/>
+        <h2 align="center">
+            <%# if can? :update, current_user %>
+                <%= link_to 'New record', new_student_path %>
+            <%#end%>
+        </h2>
+       </div>
+    <%else%>
+        <h1  align="center">STUDENT RECORDS</h1>
+        <div id="carousel1" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel1" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel1" data-slide-to="1"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div style="height:500px;">
+                    <img src="/assets/book.jpg" alt="sorry">
+                </div>
             </div>
+            <div class="item">
+                <div style="height:500px;">
+                    <img src="/assets/books.jpg" alt="sorry" >
+                </div>
+            </div>    
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel1" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">&lt;Previous</span>
+          </a>
+          <a class="right carousel-control"href="#carousel1" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next&gt;</span>
+          </a>
         </div>
-        <div class="item">
-            <div style="height:500px;">
-                <img src="/assets/books.jpg" alt="sorry" >
-            </div>
-        </div>    
-      </div>
-
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel1" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">&lt;Previous</span>
-      </a>
-      <a class="right carousel-control"href="#carousel1" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next&gt;</span>
-      </a>
-    </div>
-<%end%>
+    <%end%>
+    <ul id="search" class="sticklr">
+        <li>
+            <a href="#" class="glyphicon glyphicon-search"></a>
+            <ul>
+                <li>
+                    <form action="http://google.com" method="GET">
+                        <input type="text" name="q" value="" placeholder="Type then press Enter.." />
+                    </form>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="glyphicon glyphicon-refresh" ></a>
+            <ul>
+                <li>
+                    <a href="http://www.google.com">This is a link</a>
+                </li>
+                <li>
+                    <a href="http://www.facebook.com">Another link</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
     
 <script type="text/javascript">
+    $('#search').sticklr({
+        // animate     : true,
+        menuHeight  : 20,
+        menuWidth   : 200,
+        // relativeTo  : 'bottom',  
+        // relativeGap : 90,
+        showOn      : 'hover',
+        stickTo     : 'right',
+        tabHeight   : 34,
+        tabWidth    : 32
+    });
     $(".checks").unbind('click');
     $(".checks").click(function(){
          alert("js file executed")

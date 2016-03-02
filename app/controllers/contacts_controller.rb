@@ -7,10 +7,8 @@ class ContactsController < ApplicationController
     def show
     	@student = Student.find(params[:student_id])
     end
-
-     
- 
-  private
+    
+    private
     def contact_params
       params.require(:contact).permit(:phone_no, :house_no, :street_no, :city)
     end

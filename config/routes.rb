@@ -27,7 +27,7 @@ App1::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :students do
-    resources :contacts
+    resources :comments
   end
 
   # Example resource route with options:

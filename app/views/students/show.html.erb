@@ -18,48 +18,88 @@
 
 <h2>Contact info</h2>
 
-<% @student.contacts.each do |contact| %>
-    <p>
-        <strong>phone number</strong>
-        <%= contact.phone_no %>
-    </p>
-    <p>
-        <strong>house number</strong>
-        <%= contact.house_no %>
-    </p>
-    <p>
-        <strong>street number</strong>
-        <%= contact.street_no %>
-    </p>
-    <p>
-        <strong>city</strong>
-        <%= contact.city %>
-    </p>
-<% end %>
-
-
 <h1>Add an address:</h1>
+
+<!-- ([@user, @user.comments.build]) -->
 <%= form_for([@student, @student.contacts.build]) do |f| %>
-    <p>
-        <%= f.label :phone_no %><br>
-        <%= f.text_field :phone_no %>
-    </p>
-    <p>
-        <%= f.label :house_no %><br>
-        <%= f.text_field :house_no %>
-    </p>
-    <p>
-        <%= f.label :street_no %><br>
-        <%= f.text_field :street_no %>
-    </p>
-    <p>
-        <%= f.label :city %><br>
-        <%= f.text_field:city %>
-    </p>
-    <p>
-        <%= f.submit %>
-    </p>
-<% end %></div>
+  <div style="width:900px;height:500px">
+    <div style="float:left">
+      <div style="width: 46.5%;position: absolute; height: 36px; ">
+        <div id="caption" style="padding: 8px; border: 1px solid yellow;display: none;float:right"></div>
+      </div>
+      <video width="600" controls>
+        <source src="video.mp4" type="video/mp4">
+      </video>
+      <div>
+        <div class="form-group field ">
+          <%= f.label :comment %><br/>
+          <%= f.text_area :body, class: "caption" %>
+        </div>
+        <button id="submit_btn" remote="true">Submit</button>
+        <!-- <label>Comment</label>
+        <input id="com" type="text" class="caption" placeholder="Comment">
+        <button id="submit_btn">Submit</button> -->
+      </div>
+      <p>Playback position: <span id="demo"></span></p>
+    </div>
+    <div style="float:right" id="comments">
+      <h2>Comments:</h2>
+      <ul>
+
+      </ul>
+    </div>
+  </div>
+<%end%>
+
+
+<script src="jquery.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    // $("#text")[0].stop()
+  })
+  var video = $('video')[0]
+    console.log(video.readyState)
+    if(video.readyState > 0) {
+      console.log("======")
+      var minutes = parseInt(video.duration / 60, 10);
+      var seconds = video.duration % 60;
+    }
+    video.onplay = function() {
+      // $("#text")[0].start()
+    };
+    video.onpause = function() {
+      // $("#text")[0].stop()
+    };
+    video.ontimeupdate = function() {myFunction()};
+    
+    function myFunction() {
+      $("#demo").html(video.currentTime)
+      t=parseInt($("#demo").html())
+      c=$($("li[value='"+t+"']")[0]).html()
+      if (c != undefined){
+        d=c.split('-')[0]
+        $("#caption").html(d).show()
+      }else{
+        $("#caption").html("").hide()
+      }
+    }
+
+
+  $("#submit_btn").click(function(event) {
+    var time = parseInt($('video')[0].currentTime)
+    var c = $(".caption").val()
+    $("#caption").html( $("#caption").html() + c)
+    $(".caption").val("")
+    $("#comments ul").append("<li value="+time+">"+c+" - "+time+"</li>")
+    $
+
+  });
+  
+
+</script>
+
+
+</div>
 
 <nav class="navbar navbar-default ">
 <div class="col-sm-offset-6"><%= link_to 'Edit', edit_student_path(@student) %>||

@@ -1,5 +1,5 @@
 class Student < ActiveRecord::Base
-	has_many :contacts,  dependent: :destroy
+	has_many :comments,  dependent: :destroy
      validates :name, length: {in: 1..10}
      #  format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }, 
      validates :roll_no, length: {is: 5}
